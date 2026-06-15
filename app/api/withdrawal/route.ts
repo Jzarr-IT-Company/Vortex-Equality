@@ -27,8 +27,9 @@ export async function POST(request: NextRequest) {
     const walletType = body.walletType || 'main'
     const withdrawalPin = String(body.withdrawalPin || '').trim()
 
-    if (!Number.isFinite(amount) || amount < 10) {
-      return NextResponse.json({ error: 'Minimum withdrawal amount is $10' }, { status: 400 })
+    const minWithdrawal = Number(process.env.NEXT_PUBLIC_MIN_WITHDRAWAL_USD ?? 10)
+    if (!Number.isFinite(amount) || amount < minWithdrawal) {
+      return NextResponse.json({ error: `Minimum withdrawal amount is $${minWithdrawal}` }, { status: 400 })
     }
 
     if (!cryptoAddress) {
