@@ -25,7 +25,7 @@ import {
 } from 'lucide-react'
 import { cn } from '@/lib/utils'
 
-const MIN_WITHDRAWAL = 10
+const MIN_WITHDRAWAL = Number(process.env.NEXT_PUBLIC_MIN_WITHDRAWAL_USD ?? 10)
 
 const networkOptions = [
   { id: 'bep20',     name: 'BEP20 (BSC)',       desc: 'Binance Smart Chain', logo: 'https://cryptologos.cc/logos/bnb-bnb-logo.svg?v=029' },
